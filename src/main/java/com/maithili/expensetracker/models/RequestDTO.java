@@ -7,13 +7,14 @@ import java.time.LocalDate;
 public class RequestDTO {
     
     private Category category;
-    private Double amount;
+    private double amount;
     private LocalDate date;
 
     public RequestDTO() {
     }
 
     public RequestDTO(Category category, Double amount, LocalDate date) {
+        
         this.category = category;
         this.amount = amount;
         this.date = date;
