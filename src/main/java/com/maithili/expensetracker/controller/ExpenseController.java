@@ -88,4 +88,21 @@ public class ExpenseController {
     public List<ResponseDTO> getSortedByAmount() {
         return expenseService.getExpensesSortedByAmount();
     }
+
+
+    @PostMapping("/budget")
+public void setBudget(@RequestParam double amount) {
+    expenseService.setBudget(amount);
+}
+
+@GetMapping("/total")
+public double getTotalExpenses() {
+    return expenseService.getTotalExpenses();
+}
+
+@GetMapping("/budget/status")
+public String getBudgetStatus() {
+    return expenseService.checkBudgetStatus();
+}
+
 }

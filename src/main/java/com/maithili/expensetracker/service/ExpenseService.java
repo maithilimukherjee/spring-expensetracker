@@ -1,11 +1,11 @@
 package com.maithili.expensetracker.service;
 
-import com.maithili.expensetracker.models.RequestDTO;
-import com.maithili.expensetracker.models.ResponseDTO;
-import com.maithili.expensetracker.entity.Category;
-
 import java.time.LocalDate;
 import java.util.List;
+
+import com.maithili.expensetracker.entity.Category;
+import com.maithili.expensetracker.models.RequestDTO;
+import com.maithili.expensetracker.models.ResponseDTO;
 
 public interface ExpenseService {
 
@@ -14,6 +14,12 @@ public interface ExpenseService {
     void updateExpense(Long id, RequestDTO requestDTO);
 
     void deleteExpense(Long id);
+
+    void setBudget(double amount);
+
+    double getTotalExpenses();
+
+    String checkBudgetStatus();
 
     ResponseDTO getExpenseById(Long id);
 
