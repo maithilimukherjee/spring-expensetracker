@@ -17,7 +17,7 @@ public class Expense {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Category category;
-    private Double amount;
+    private double amount;
     private LocalDate date;
 
     // Getters and Setters
