@@ -11,21 +11,22 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service
-public class ExpenseServiceIplementation implements ExpenseService {
+public class ExpenseServiceImplementation implements ExpenseService {
 
     private final ExpenseRepository expenseRepository;
 
-    public ExpenseServiceIplementation(ExpenseRepository expenseRepository) {
+    public ExpenseServiceImplementation(ExpenseRepository expenseRepository) {
         this.expenseRepository = expenseRepository;
     }
 
     @Override
-    public void addExpense(RequestDTO requestDTO) {
+    public ResponseDTO addExpense(RequestDTO requestDTO) {
         Expense expense = new Expense();
         expense.setCategory(requestDTO.getCategory());
         expense.setAmount(requestDTO.getAmount());
-        expense.setDate(requestDTO.getDate());
-        expenseRepository.save(expense);
+        expense.setDate(requestDTO.getDate());  
+        Expense savedExpense = expenseRepository.save(expense);
+        return new ResponseDTO(savedExpense);
     }
 
     @Override

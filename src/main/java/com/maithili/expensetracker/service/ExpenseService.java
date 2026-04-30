@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ExpenseService {
 
-    void addExpense(RequestDTO requestDTO);
+    ResponseDTO addExpense(RequestDTO requestDTO);
 
     void updateExpense(Long id, RequestDTO requestDTO);
 
