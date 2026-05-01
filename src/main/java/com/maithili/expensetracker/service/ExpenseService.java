@@ -21,6 +21,8 @@ public interface ExpenseService {
 
     String checkBudgetStatus();
 
+    double getBudgetAmount();
+
     ResponseDTO getExpenseById(Long id);
 
     List<ResponseDTO> getAllExpenses();

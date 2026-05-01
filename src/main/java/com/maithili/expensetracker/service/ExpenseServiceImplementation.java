@@ -101,10 +101,13 @@ public class ExpenseServiceImplementation implements ExpenseService {
 
     @Override
     public void setBudget(double amount) {
-        Budget budget = new Budget();
-        budget.setAmount(amount);
-        budgetRepository.save(budget);
-    }
+
+        Budget budget = budgetRepository.findById(1L)
+                .orElse(new Budget());
+
+    budget.setAmount(amount);
+    budgetRepository.save(budget);
+}
 
     @Override
     public double getTotalExpenses() {
@@ -116,17 +119,30 @@ public class ExpenseServiceImplementation implements ExpenseService {
 
     @Override
     public String checkBudgetStatus() {
-        double total = getTotalExpenses();
+        double totalExpenses = getTotalExpenses();
+        double budgetAmount = getBudgetAmount();    
 
+        if(budgetAmount == 0) {
+            return "Budget not set";
+        }
+
+        if (totalExpenses < budgetAmount) {
+            return "Within Budget";
+        } else if (totalExpenses == budgetAmount) {
+            return "Budget Reached";
+        } else {
+            return "Over Budget";
+        }
+    }
+
+
+
+    @Override
+    public double getBudgetAmount() {
         Budget budget = budgetRepository.findAll()
                 .stream()
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Budget not set"));
-
-        if (total > budget.getAmount()) {
-            return "Budget exceeded";
-        } else {
-            return "Within budget";
-        }
+        return budget.getAmount();
     }
 }

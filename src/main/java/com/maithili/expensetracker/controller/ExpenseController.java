@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
+
+
 @RestController
 @RequestMapping("/api/expenses")
 public class ExpenseController {
@@ -91,8 +93,8 @@ public class ExpenseController {
 
 
     @PostMapping("/budget")
-public void setBudget(@RequestParam double amount) {
-    expenseService.setBudget(amount);
+    public void setBudget(@RequestParam double amount) {
+        expenseService.setBudget(amount);
 }
 
 @GetMapping("/total")
@@ -103,6 +105,18 @@ public double getTotalExpenses() {
 @GetMapping("/budget/status")
 public String getBudgetStatus() {
     return expenseService.checkBudgetStatus();
+}
+
+@GetMapping("/budget")
+public double getBudgetAmount() {
+    return expenseService.getBudgetAmount();
+}
+
+@GetMapping("/budget/remaining")
+public double getRemainingBudget() {
+    double totalExpenses = expenseService.getTotalExpenses();
+    double budgetAmount = expenseService.getBudgetAmount();
+    return budgetAmount - totalExpenses;    
 }
 
 }
